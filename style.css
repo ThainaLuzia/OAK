@@ -1,0 +1,25 @@
+.purple-circle{
+    background-color: #6F5BA4;
+    height: 500px;
+    width: 50em;
+    border-radius: 60%;
+    filter: blur(60px);
+    position: absolute;
+}
+
+.purple-circle.top{
+    right: -250px;
+    top: -250px;
+}
+
+.purple-circle.bottom{
+    left: -300px;
+    bottom: -220px;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: #F2F2F2;
+}
