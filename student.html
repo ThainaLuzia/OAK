@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/modal.css">
-    <script src="js/scripts.js" defer></script>
+    <script src="js/student.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
-
 <body>
     <header id="oak-header">
         <svg width="82" height="24" viewBox="0 0 82 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -31,6 +29,7 @@
             </defs>
         </svg>
     </header>
+
     <div id="root">
         <nav id="main-nav">
             <li id="routes-links">
@@ -38,64 +37,46 @@
             </li>
             <button class="exit-home">Sair</button>
         </nav>
-        <section id="main-section">
+        <div id="fade-st" class="hide"></div>
+    <div id="modal-st" class="hide">
+
+        <section id="main-section-st">
             <div class="list-header">
-                <h1>Salas</h1>
-                <button id="open-modal" class="button-primary">Nova sala</button>
+                <h1>Alunos-INF3Y</h1>
+                <button id="open-modal-st" class="button-primary">Nova sala</button>
             </div>
-            <ul id="room-list">
-                <li class="folder-componet">
-                    <h2>INF2Y</h2>
-                    <p>
-                        Sala 21 <br/>
-                        31 alunos <br/>
-                        Primeiro andar
-                    </p>
-                </li>
-                <li class="folder-componet">
-                    <h2>INF2Y</h2>
-                    <p>
-                        Sala 21 <br/>
-                        31 alunos <br/>
-                        Primeiro andar
-                    </p>
-                </li>
-                <li class="folder-componet">
-                    <h2>INF2Y</h2>
-                    <p>
-                        Sala 21 <br/>
-                        31 alunos <br/>
-                        Primeiro andar
-                    </p>
-                </li>
-                <li class="folder-componet">
-                    <h2>INF2Y</h2>
-                    <p>
-                        Sala 21 <br/>
-                        31 alunos <br/>
-                        Primeiro andar
-                    </p>
-                </li>
-            </ul>
         </section>
-    </div>
-    <div id="fade" class="hide"></div>
-    <div id="modal" class="hide">
+    
         <div class="modal-header">
-            <h2>Adicione uma <br /> <span class="purple-text">nova sala</span> </h2>
+            <h2>Adicione um <br /> <span class="purple-text">novo aluno</span> </h2>
         </div>
         <div class="modal body">
             <div class="textfield-container">
-                <label for="textfield">Nome da sala:</label>
-                <input type="text" name="nome_sala" id="nome_sala">
-                <label for="textfield">Descrição:</label>
-                <input type="text" name="description" id="description">
+                <label for="textfield">Nome do aluno:</label>
+                <input type="text" name="nome_student" id="nome_student">
+                <label for="textfield">CPF:</label>
+                <input type="text" name="CPF" id="CPF">
+                <label for="textfield">EMAIL:</label>
+                <input type="email" name="email" id="email">
+                <label for="textfield">Criar senha:</label>
+                <input type="password" name="password_student" id="password_student">
+                <fieldset>
+                    <legend>
+                        Selecione o status do aluno:
+                    </legend>
+                    <div class="radio">
+                        <input type="radio" id="active" name="drone" value="active" checked />
+                        <label for="active">Ativo</label>
+                      </div>
+                      <div>
+                        <input type="radio" id="inactive" name="drone" value="inactive" />
+                        <label for="inactive">Inativo</label>
+                      </div>
             </div>
             <div class="action-container">
-                <button id="close-modal" class="button-secondary">Cancelar</button>
-                <button id="create-room" class="button-primary">Adicionar</button>
+                <button id="close-modal-st" class="button-secondary">Cancelar</button>
+                <button id="create-room-st" class="button-primary">Adicionar</button>
             </div>
         </div>
 </body>
-
 </html>
