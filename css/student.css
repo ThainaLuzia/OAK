@@ -1,0 +1,50 @@
+.student-list-container {
+    list-style: none;
+    padding: 0%;
+}
+.student-list-container >li {
+    background-color: #DFDDE6;
+    width: 100%;
+    height: 54px;
+    border-radius: 10px;
+    display: flex;
+   gap: 12px;
+    padding: 12px 4px;
+    align-items: center;
+    font-size: 14px;
+    justify-content: space-between;
+}
+
+.list-action {
+    padding-right: 24px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+svg {
+    fill: black;
+}
+
+.student-list-container >li:hover {
+   border: #7762b3 solid 3px;
+}
+
+.list-action >svg:hover {
+    stroke: #7762b3;
+    fill: #7762b3;
+    scale: 0.9;
+}
+
+.status {
+    background-color: #39AC11;
+    width: 21px;
+    height: 21px;
+    border-radius: 360px;
+    margin-left: 24px;
+}
+.status-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}

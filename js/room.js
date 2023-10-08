@@ -21,25 +21,25 @@ function onLoad() {
     
 }
 
-function createRoom() {
+function createStudent() {
     //mandar pro samuel
     //se deu erro: alert de erro
     //se deu certo: cria o component
     //alert("Não foi possivel criar a sala")
     //alert("Sala criada com sucesso")
-    createRoomComponent(roomName.value, roomNumber.value, 0, roomFloor.value)
-    cleanRoomModalFields()
+    createStudentComponent(roomName.value, roomNumber.value, 0, roomFloor.value)
+    cleanStudentModalFields()
     toggleModal()
     emptyMessgeRoom.classList.add("hide")
 }
 
-function cleanRoomModalFields(){
+function cleanStudentModalFields(){
     roomName.value = null
     roomNumber.value = null
     roomFloor.value = null
 }
 
-function createRoomComponent(nomeSala, numero, qtdAlunos, andar) {
+function createStudentComponent(nomeSala, numero, qtdAlunos, andar) {
     const pai = document.createElement("li")
     const titulo = document.createElement("h2")
     const texto = document.createElement("p")
