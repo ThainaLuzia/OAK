@@ -6,6 +6,7 @@ const listaDeSalas = document.querySelector("#room-list");
 const roomName = document.querySelector("#room_name")
 const roomNumber = document.querySelector("#room_number")
 const roomFloor = document.querySelector("#room_floor")
+const emptyMessgeRoom = document.querySelector("#empty-message-room")
 
 const toggleModal = () => {
     modal.classList.toggle("hide");
@@ -29,6 +30,7 @@ function createRoom() {
     createRoomComponent(roomName.value, roomNumber.value, 0, roomFloor.value)
     cleanRoomModalFields()
     toggleModal()
+    emptyMessgeRoom.classList.add("hide")
 }
 
 function cleanRoomModalFields(){

@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modal.css">
     <title>OAK</title>
 </head>
 <body class="login-container">
@@ -16,18 +18,14 @@
                 OAK
             </h1>
         </div>
-        <form action="#">
-            <div class="textfield">
+        <form action="#" class="textfield-container">
                 <label for="login">Login:</label>
                 <input type="text" name="login" id="login" placeholder="Digite seu login aqui...">
-            </div>
-            <div class="textfield">
                 <label for="senha">Senha:</label>
                 <input type="password" name="senha" id="senha" placeholder="Digite sua senha aqui...">
-            </div>
         </form>
-        <div class="Button-log">
-            <button class="button-login" onclick="logar()">Entrar</button>
+        <div>
+            <button class="button-primary float-right" onclick="logar()">Entrar</button>
         </div>
     </div>
     <script>
@@ -37,7 +35,7 @@
 
             if (login == "admin" && senha == "admin") {
                 alert("Sucesso");
-                location.href = "home.html";
+                location.href = "room.html";
             } else {
                 alert('Usuario ou senha incorretos');
             }
