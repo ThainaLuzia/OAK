@@ -22,7 +22,7 @@ body {
     flex-direction: column;
 }
 
-#main-section {
+.main-section {
     flex: 1;
     padding-left: 32px;
     padding-right: 32px;
@@ -41,7 +41,7 @@ body {
     gap: 12px;
 }
 
-a {
+.menu-link {
     color: #EBEBEB;
     text-decoration: none;
     text-align: center;
@@ -49,7 +49,7 @@ a {
     border-radius: 7px;
 }
 
-a:hover {
+.menu-link:hover {
     background-color: #7762b3;
     font-weight: 700;
 }

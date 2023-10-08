@@ -9,7 +9,7 @@
     max-width: 90%;
     padding: 1.2rem;
     border-radius: 7px;
-    height: 380px;
+    min-height: 380px;
 
 }
 
