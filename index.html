@@ -2,10 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/login.css">
     <title>OAK</title>
 </head>
-<body>
-    <p>Olá mundo!</p>
+<body class="login-container">
+    <div class="purple-circle top"></div>
+    <div class="purple-circle bottom"></div>
+    <div class="card-main">
+        <div class="title-oak">
+            <h1>
+                OAK
+            </h1>
+        </div>
+        <form action="#">
+            <div class="textfield">
+                <label for="login">Login:</label>
+                <input type="text" name="login" id="login" placeholder="Digite seu login aqui...">
+            </div>
+            <div class="textfield">
+                <label for="senha">Senha:</label>
+                <input type="password" name="senha" id="senha" placeholder="Digite sua senha aqui...">
+            </div>
+        </form>
+        <div class="Button-log">
+            <button class="button-login" onclick="logar()">Entrar</button>
+        </div>
+    </div>
+    <script>
+        function logar() {
+            let login = document.getElementById('login').value;
+            let senha = document.getElementById('senha').value;
+
+            if (login == "admin" && senha == "admin") {
+                alert("Sucesso");
+                location.href = "home.html";
+            } else {
+                alert('Usuario ou senha incorretos');
+            }
+        }
+    </script>
 </body>
+
 </html>

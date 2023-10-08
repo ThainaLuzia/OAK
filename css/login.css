@@ -1,0 +1,108 @@
+.login-container{
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.card-main{
+    margin: 0 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 597px;
+    height: 390px;
+    border-radius: 28px;
+    flex-direction: column;
+    background: rgba(242, 242, 242, 0.68);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
+.title-oak > h1 {
+    width: 63px;
+    height: 35px;
+    color: #5D4895;
+    font-family: 'Roboto', sans-serif;
+    font-size: 25px;
+    font-style: italic;
+    font-weight: 700;
+    line-height: normal;
+}
+
+
+.textfield> input{
+    background-color: #f2f2f2;
+    width: 526px;
+    height: 44px;
+    flex-shrink: 0;
+    fill: #f2f2f2;
+    border-radius: 6px;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25) inset;
+    padding-left: 45px;
+    border-color: #f2f2f2;
+
+}
+.textfield> label{
+    width: 113px;
+    height: 15px;
+    flex-shrink: 0;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    
+}
+.textfield{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 15px;
+    
+}
+
+.Button-log {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 35px;
+   
+}
+
+.button-login{
+    width: 122.719px;
+    height: 34.362px;
+    border-radius: 7px;
+    background: #5D4895;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 23px;
+    
+}
+
+.purple-circle{
+    background-color: #6F5BA4;
+    height: 500px;
+    width: 50em;
+    border-radius: 60%;
+    filter: blur(60px);
+    position: absolute;
+}
+
+.purple-circle.top{
+    right: -250px;
+    top: -250px;
+}
+
+.purple-circle.bottom{
+    left: -300px;
+    bottom: -220px;
+}
