@@ -160,3 +160,9 @@ button {
 .empty-message.hide{
     display: none;
 }
+
+.empty-message >p {
+    width: 300px;
+    text-align: center;
+    margin-top: -12px;
+}
