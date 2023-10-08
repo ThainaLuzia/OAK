@@ -25,8 +25,13 @@ function createRoom() {
     //se deu erro: alert de erro
     //se deu certo: cria o component
     //alert("Não foi possivel criar a sala")
-    alert("Sala criada com sucesso")
+    //alert("Sala criada com sucesso")
     createRoomComponent(roomName.value, roomNumber.value, 0, roomFloor.value)
+    cleanRoomModalFields()
+    toggleModal()
+}
+
+function cleanRoomModalFields(){
     roomName.value = null
     roomNumber.value = null
     roomFloor.value = null
@@ -44,7 +49,6 @@ function createRoomComponent(nomeSala, numero, qtdAlunos, andar) {
     pai.appendChild(titulo)
     pai.appendChild(texto)
     listaDeSalas.appendChild(pai)
-    toggleModal()
 }
 
 onLoad();
