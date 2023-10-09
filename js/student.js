@@ -22,7 +22,7 @@ const toggleModal = () => {
 });
 
 function onLoad() {
-
+    fetchStudents()
 }
 
 function createStudent() {
@@ -45,11 +45,11 @@ function cleanStudentModalFields() {
     createPasswordInput.value = null
 }
 //criar html so que em js 
-function createStudentComponent(studentName, CPF, email) {
+function createStudentComponent(studentName, rm, email) {
     const pai = document.createElement("li")
     pai.innerHTML = `<div class="status-container">
                         <span class="status"></span>
-                        <p>${CPF}</p>
+                        <p>${rm}</p>
                     </div>
                     <h3>${studentName}</h3>
                     <p>${email}</p>
@@ -64,6 +64,16 @@ function createStudentComponent(studentName, CPF, email) {
                         </svg>
                     </div>`
     listaDeAlunos.append(pai)
+}
+
+function fetchStudents() {
+    fetch("https://mocki.io/v1/e091728c-2908-44da-8888-00f06ae2b22a").then(res => res.json()).then(alunos => {
+        for (let index = 0; index < alunos.length; index++) {
+            const aluno = alunos[index];
+            createStudentComponent(aluno.name, aluno.rm, aluno.email)
+            emptyMessgeStudent.classList.add("hide")
+        }
+    })
 }
 
 onLoad();

@@ -18,7 +18,7 @@ const toggleModal = () => {
 });
 
 function onLoad() {
-    
+    fetchRooms()
 }
 
 function createRoom() {
@@ -51,6 +51,16 @@ function createRoomComponent(nomeSala, numero, qtdAlunos, andar) {
     pai.appendChild(titulo)
     pai.appendChild(texto)
     listaDeSalas.appendChild(pai)
+}
+
+function fetchRooms() {
+    fetch("https://mocki.io/v1/710708d1-2f91-4e24-8f3d-774d559f1071").then(res => res.json()).then(salas => {
+        for (let index = 0; index < salas.length; index++) {
+            const sala = salas[index];
+            createRoomComponent(sala.name, sala.number, sala.qtdStudents, sala.floor)
+        }
+        emptyMessgeRoom.classList.add("hide")
+    })
 }
 
 onLoad();
