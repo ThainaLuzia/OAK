@@ -31,7 +31,6 @@ function createStudent() {
     //se deu certo: cria o component
     //alert("Não foi possivel criar a sala")
     //alert("Sala criada com sucesso")
-    //passar os parametros de aluno (atualizar linha abaixo)
     createStudentComponent(studentNameInput.value, cpfInput.value, emailInput.value)
     cleanStudentModalFields()
     toggleModal()
@@ -76,4 +75,15 @@ function fetchStudents() {
     })
 }
 
+function createStudentAPI() {
+    fetch("https://mocki.io/v1/e091728c-2908-44da-8888-00f06ae2b22a").then().catch()
+}
+
+function deletStudentAPI() {
+
+}
+
+function updateStudentAPI() {
+
+}
 onLoad();
