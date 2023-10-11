@@ -34,7 +34,7 @@
         <nav id="main-nav">
             <li id="routes-links">
                 <a href="" class="menu-link">Inicio</a>
-                <a href="/room.html" class="menu-link">Salas</a>
+                <a href="/room.html" class="menu-link">Turmas</a>
                 <a href="/student.html" class="menu-link">Alunos</a>
             </li>
 
@@ -42,31 +42,43 @@
         </nav>
         <section class="main-section">
             <div class="list-header">
-                <h1>Salas</h1>
-                <button id="open-modal" class="button-primary">Nova sala</button>
+                <h1>Turmas</h1>
+                <button id="open-modal" class="button-primary">Nova turma</button>
             </div>
             <ul id="room-list">
             </ul>
             <div id="empty-message-room" class="empty-message">
                 <img src="assets/cat.png" width="290" height="272.16">
-                <h1>Nenhuma sala encontrada</h1>
-                <p>Adicione novas salas ou verifique sua conexão de internet</p>
+                <h1>Nenhuma turma encontrada</h1>
+                <p>Adicione novas turmas ou verifique sua conexão de internet</p>
             </div>
         </section>
     </div>
     <div id="fade" class="hide"></div>
     <div id="modal" class="hide">
         <div class="modal-header">
-            <h2>Adicione uma <br /> <span class="purple-text">nova sala</span> </h2>
+            <h2>Adicione uma <br /> <span class="purple-text">nova turma</span> </h2>
         </div>
         <div class="modal body">
             <div class="textfield-container">
-                <label for="textfield">Nome da sala:</label>
+                <label for="textfield">Nome da turma:</label>
                 <input type="text" name="nome_sala" id="room_name">
+                <label for="textfield">Ano letivo:</label>
+                <input type="number" min="1900" max="2099" step="1" value="2023"/>
+                <label>Período:</label>
+                <select name="periodo">
+                    <option value="valor1">Matutino</option>
+                    <option value="valor2" selected>Vespertino</option>
+                    <option value="valor3">Noturno</option>
+                  </select>
                 <label for="textfield">Número da sala:</label>
-                <input type="number" name="number" id="room_number">
-                <label for="textfield">Andar:</label>
                 <input type="number" name="floor" id="room_floor">
+                <label>Tipo da sala:</label>
+                <select name="periodo">
+                    <option value="valor1">Laboratorio</option>
+                    <option value="valor2" selected>Biblioteca</option>
+                    <option value="valor3">Auditorio</option>
+                  </select>
             </div>
             <div class="action-container">
                 <button id="close-modal" class="button-secondary">Cancelar</button>

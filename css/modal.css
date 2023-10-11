@@ -91,3 +91,15 @@
 .purple-text {
     color: #5D4895;
 }
+
+.textfield-container> select{
+    background-color: #EBEBEB;
+    height: 44px;
+    flex-shrink: 0;
+    fill: #EBEBEB;
+    border-radius: 6px;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25) inset;
+    padding-left: 8px;
+    border-color: #EBEBEB;
+}
+
