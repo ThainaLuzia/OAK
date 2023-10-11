@@ -4,8 +4,10 @@ const modal = document.querySelector("#modal");
 const fade = document.querySelector("#fade"); 
 const listaDeTurma = document.querySelector("#room-list");
 const roomName = document.querySelector("#room_name")
-const roomNumber = document.querySelector("#room_number")
-const roomFloor = document.querySelector("#room_floor")
+const roomYear = document.querySelector("#room_year")
+const roomPeriod = document.querySelector("#room_period")
+const roomNumber = document.querySelector("#room_number") 
+const roomType = document.querySelector("#room_type") 
 const emptyMessgeRoom = document.querySelector("#empty-message-room")
 const URL = "https://v2csj5c0-3000.brs.devtunnels.ms/"
 
@@ -28,7 +30,7 @@ function createRoom() {
     //se deu certo: cria o component
     //alert("Não foi possivel criar a sala")
     //alert("Sala criada com sucesso")
-    createRoomComponent(roomName.value, roomNumber.value, 0, roomFloor.value)
+    createRoomComponent(roomName.value, roomYear.value, 0, roomPeriod.value)
     cleanRoomModalFields()
     toggleModal()
     emptyMessgeRoom.classList.add("hide")
@@ -36,8 +38,8 @@ function createRoom() {
 
 function cleanRoomModalFields(){
     roomName.value = null
-    roomNumber.value = null
-    roomFloor.value = null
+    roomYear.value = null
+    roomPeriod.value = null
 }
 
 function createRoomComponent(nomeTurma, numero, qtdAlunos, andar) {
@@ -65,3 +67,4 @@ function fetchRooms() {
 }
 
 onLoad(); 
+
