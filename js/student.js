@@ -12,13 +12,13 @@ const emailInput = document.querySelector("#email")
 const createPasswordInput = document.querySelector("#create_password_student")
 const emptyMessgeStudent = document.querySelector("#empty-message-student")
 
-const toggleModal = () => {
+const alternarModal = () => {
     modal.classList.toggle("hide");
     fade.classList.toggle("hide");
 };
 
 [openModalButton, closeModalButton, fade].forEach((el) => {
-    el.addEventListener("click", () => toggleModal());
+    el.addEventListener("click", () => alternarModal());
 });
 
 function onLoad() {
@@ -33,7 +33,7 @@ function createStudent() {
     //alert("Sala criada com sucesso")
     createStudentComponent(studentNameInput.value, cpfInput.value, emailInput.value)
     cleanStudentModalFields()
-    toggleModal()
+    alternarModal()
     emptyMessgeStudent.classList.add("hide")
 }
 //atualizar para os campos modal de alunos 
