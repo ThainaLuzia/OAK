@@ -7,6 +7,7 @@ const fade = document.querySelector("#fade");
 // Mudar os nomes das variaveis e dos ids (roxo, #) // 
 const listaDeAlunos = document.querySelector("#student-list");
 const studentNameInput = document.querySelector("#name_student")
+
 const cpfInput = document.querySelector("#CPF")
 const emailInput = document.querySelector("#email")
 const createPasswordInput = document.querySelector("#create_password_student")

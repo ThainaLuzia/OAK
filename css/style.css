@@ -166,3 +166,10 @@ button {
     text-align: center;
     margin-top: -12px;
 }
+
+.column {
+    display: flex;
+    flex-direction: row!important;
+    flex: 1;
+    gap: 25px;
+}

@@ -1,11 +1,11 @@
 const openModalButton = document.querySelector("#open-modal");
-const closeModalButton = document.querySelector("#close-modal"); 
-const modal = document.querySelector("#modal"); 
-const fade = document.querySelector("#fade"); 
-const listaDeTurma = document.querySelector("#room-list"); 
+const closeModalButton = document.querySelector("#close-modal");
+const modal = document.querySelector("#modal");
+const fade = document.querySelector("#fade");
+const listaDeTurma = document.querySelector("#room-list");
 const emptyMessgeRoom = document.querySelector("#empty-message-room")
 const camposTurma = {
-    nome:  document.querySelector("#room_name"),
+    nome: document.querySelector("#room_name"),
     anoLetivo: document.querySelector("#room_year"),
     periodo: document.querySelector("#room_period"),
     sala: document.querySelector("#room")
@@ -22,11 +22,11 @@ const alternarModal = () => {
 });
 
 function onLoad() {
-    fetchRooms()
+    buscarTurmas()
 }
 
 function criarTurma() {
-    //mandar pro samuel
+   criarTurmaAPI()
     //se deu erro: alert de erro
     //se deu certo: cria o component
     //alert("Não foi possivel criar a sala")
@@ -37,11 +37,11 @@ function criarTurma() {
     emptyMessgeRoom.classList.add("hide")
 }
 
-function limparCamposModalTurma(){
+function limparCamposModalTurma() {
     camposTurma.nome.value = null
     camposTurma.anoLetivo.value = 2023
     camposTurma.periodo.value = "matutino"
-    camposTurma.sala.value = 1 
+    camposTurma.sala.value = 1
 }
 
 function criarComponenteDeTurma(nome, anoLetivo, periodo, sala) {
@@ -59,7 +59,7 @@ function criarComponenteDeTurma(nome, anoLetivo, periodo, sala) {
     listaDeTurma.appendChild(pai)
 }
 
-function fetchRooms() {
+function buscarTurmas() {
     fetch(URL + "class_group").then(res => res.json()).then(turmas => {
         for (let index = 0; index < turmas.length; index++) {
             const turma = turmas[index];
@@ -69,5 +69,20 @@ function fetchRooms() {
     })
 }
 
-onLoad(); 
+function criarTurmaAPI() {
+    fetch(URL + "class_group", {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json'
+          },
+        body: JSON.stringify({
+            nome: camposTurma.nome.value,
+            anoLetivo: camposTurma.anoLetivo.value,
+            periodo: camposTurma.periodo.value,
+            sala: camposTurma.sala.value
+        })
+    })
+}
+
+onLoad();
 
