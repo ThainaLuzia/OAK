@@ -2,13 +2,14 @@ const openModalButton = document.querySelector("#open-modal");
 const closeModalButton = document.querySelector("#close-modal"); 
 const modal = document.querySelector("#modal"); 
 const fade = document.querySelector("#fade"); 
-const listaDeTurma = document.querySelector("#room-list");
-const roomName = document.querySelector("#room_name")
-const roomYear = document.querySelector("#room_year")
-const roomPeriod = document.querySelector("#room_period")
-const roomNumber = document.querySelector("#room_number") 
-const roomType = document.querySelector("#room_type") 
+const listaDeTurma = document.querySelector("#room-list"); 
 const emptyMessgeRoom = document.querySelector("#empty-message-room")
+const camposTurma = {
+    nome:  document.querySelector("#room_name"),
+    anoLetivo: document.querySelector("#room_year"),
+    periodo: document.querySelector("#room_period"),
+    sala: document.querySelector("#room")
+}
 const URL = "https://v2csj5c0-3000.brs.devtunnels.ms/"
 
 const toggleModal = () => {
@@ -30,26 +31,28 @@ function createRoom() {
     //se deu certo: cria o component
     //alert("Não foi possivel criar a sala")
     //alert("Sala criada com sucesso")
-    createRoomComponent(roomName.value, roomYear.value, 0, roomPeriod.value)
+    createRoomComponent()
     cleanRoomModalFields()
     toggleModal()
     emptyMessgeRoom.classList.add("hide")
 }
 
 function cleanRoomModalFields(){
-    roomName.value = null
-    roomYear.value = null
-    roomPeriod.value = null
+    camposTurma.nome.value = null
+    camposTurma.anoLetivo.value = 2023
+    camposTurma.periodo.value = "matutino"
+    camposTurma.sala.value = 1 
 }
 
-function createRoomComponent(nomeTurma, numero, qtdAlunos, andar) {
+function createRoomComponent() {
     const pai = document.createElement("li")
     const titulo = document.createElement("h2")
     const texto = document.createElement("p")
 
-    titulo.innerHTML = nomeTurma
-    texto.innerHTML = "Turma: " + numero + "<br/>" + "Alunos: " + qtdAlunos + "<br/>" + "Andar: " + andar
-
+    titulo.innerHTML = camposTurma.nome.value
+    texto.innerHTML = `Ano letivo: ${camposTurma.anoLetivo.value}<br/> 
+    Período: ${camposTurma.periodo.value}<br/>
+    Sala: ${camposTurma.sala.value}`
     pai.className = "folder-componet"
     pai.appendChild(titulo)
     pai.appendChild(texto)
