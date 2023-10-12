@@ -33,7 +33,7 @@ onLoad();
 // AÇÕES DA TELA
 
 function salvarTurma() {
-  if (inputsTurma.id.value) {
+  if (inputsTurma.id.value != null) {
     atualizarTurma();
   } else {
     criarTurma();

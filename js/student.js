@@ -9,12 +9,17 @@ const BASE_URL = "https://v2csj5c0-3000.brs.devtunnels.ms/"
 // CAMPOS DA MODAL DE ALUNOS
 const inputsAluno = {
     nome: document.querySelector("#name_student"),
-    email: document.querySelector("#email"),
+    rg: document.querySelector("#rg"),
     cpf: document.querySelector("#cpf"),
     telefone: document.querySelector("#phone"),
     endereco: document.querySelector("#address"),
+    email: document.querySelector("#email"),
     senha: document.querySelector("#create_password_student"),
     senhaConfirma: document.querySelector("#confirm_password_student"),
+}
+
+function onLoad() {
+    fetchStudents()
 }
 
 const alternarModal = () => {
@@ -26,36 +31,76 @@ const alternarModal = () => {
     el.addEventListener("click", () => alternarModal());
 });
 
-function onLoad() {
-    fetchStudents()
-}
+onLoad()
 
-function createStudent() {
-    //mandar pro samuel
-    //se deu erro: alert de erro
-    //se deu certo: cria o component
-    //alert("Não foi possivel criar a sala")
-    //alert("Sala criada com sucesso")
-    createStudentComponent(inputsAluno.nome.value, inputsAluno.cpf.value, inputsAluno.email.value)
-    cleanStudentModalFields()
-    alternarModal()
-    emptyMessgeStudent.classList.add("hide")
-}
-//atualizar para os campos modal de alunos 
-function cleanStudentModalFields() {
-    studentNameInput.value = null
-    cpfInput.value = null
-    emailInput.value = null
-    createPasswordInput.value = null
-}
-//criar html so que em js 
-function createStudentComponent(studentName, rm, email) {
+function salvarAluno() {
+    if (inputsTurma.id.value) {
+      atualizarAluno();
+    } else {
+      criarAluno();
+    }
+  }
+
+  function criarAluno() {
+    criarAlunoAPI()
+      .then(function () {
+        // SE DEU CERTO CRIAR  O ALUNO
+        window.location.reload();
+      })
+      .catch(function () {
+        // SE DEU ERRO CRIAR A TURMA
+        alert(
+          "Não foi possível criar aluno corretamente. Tente novamente mais tarde"
+        );
+      });
+  }
+
+  function atualizarAluno() {
+    atualizarAlunoAPI(
+      inputsAluno.nome.value,
+      inputsAluno.rg.value,
+      inputsAluno.cpf.value,
+      inputsAluno.telefone.value,
+      inputsAluno.endereco.value,
+      inputsAluno.email.value,
+      inputsAluno.senha.value,
+      inputsAluno.senhaConfirma.value
+    )
+      .then(function () {
+        // SE DEU CERTO ATUALIZAR  A TURMA
+        window.location.reload();
+      })
+      .catch(function () {
+        // SE DEU ERRO ATUALIZAR A TURMA
+        alert(
+          "Não foi possível atualizar o aluno corretamente. Tente novamente mais tarde"
+        );
+      });
+  }
+
+  function limparCamposModalAluno() {
+    definirCamposModalAluno(null, null, null, null, null, null, null, null);
+  }
+
+  function definirCamposModalAluno(nome, rg, cpf, telefone, endereco, email, senha, senhaConfirma){
+  inputsAluno.nome.value = nome;
+  inputsAluno.rg.value = rg;
+  inputsAluno.cpf.value = cpf;
+  inputsAluno.telefone.value = telefone;
+  inputsAluno.endereco.value = endereco;
+  inputsAluno.email.value = email;
+  inputsAluno.senha.value  = senha;
+  inputsAluno.senhaConfirma.value = senhaConfirma
+  }
+
+  //criar html so que em js 
+function criarComponenteAluno(nome, rg, cpf, telefone, endereco, email, senha, senhaConfirma) {
     const pai = document.createElement("li")
     pai.innerHTML = `<div class="status-container">
                         <span class="status"></span>
-                        <p>${rm}</p>
+                        <p>${cpf}</p>
                     </div>
-                    <h3>${studentName}</h3>
+                    <h3>${nome}</h3>
                     <p>${email}</p>
                     <div class="list-action">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
@@ -70,17 +115,50 @@ function createStudentComponent(studentName, rm, email) {
     listaDeAlunos.append(pai)
 }
 
+function buscarAlunosAPI() {
+    fetch(BASE_URL + "students")
+      .then((res) => res.json())
+      .then((alunos) => {
+        if (alunos.length <= 0) {
+          return;
+        }
+        for (let index = 0; index < alunos.length; index++) {
+          const aluno = alunos[index];
+          criarComponenteAluno(
+            aluno.nome,
+            turma.ano_letivo,
+            turma.periodo,
+            turma.sala_id,
+            turma.id
+          );
+        }
+        mensagemListaVazia.classList.add("hide");
+      });
+  }
+
+function criarAluno() {
+    //mandar pro samuel
+    //se deu erro: alert de erro
+    //se deu certo: cria o component
+    //alert("Não foi possivel criar a sala")
+    //alert("Sala criada com sucesso")
+    criarComponenteAluno(inputsAluno.nome.value, inputsAluno.rg.value, inputsAluno.cpf.value, inputsAluno.telefone.value, inputsAluno.endereco.value, inputsAluno.email.value, inputsAluno.senha.value, inputsAluno.senhaConfirma.value)
+    limparCamposModalAluno()
+    alternarModal()
+    emptyMessgeStudent.classList.add("hide")
+}
+
 function fetchStudents() {
     fetch("https://mocki.io/v1/e091728c-2908-44da-8888-00f06ae2b22a").then(res => res.json()).then(alunos => {
         for (let index = 0; index < alunos.length; index++) {
             const aluno = alunos[index];
-            createStudentComponent(aluno.name, aluno.rm, aluno.email)
+            criarComponenteAluno(aluno.nome, aluno.rg, aluno.cpf, aluno.telefone, aluno.endereco, aluno.email, aluno.senha, aluno.senhaConfirma)
             emptyMessgeStudent.classList.add("hide")
         }
     })
 }
 
-function createStudentAPI() {
+function criarAlunoAPI() {
     fetch("https://mocki.io/v1/e091728c-2908-44da-8888-00f06ae2b22a").then().catch()
 }
 
