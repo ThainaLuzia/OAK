@@ -46,6 +46,10 @@ function limparCamposModalTurma() {
 
 function criarComponenteDeTurma(nome, anoLetivo, periodo, sala) {
     const pai = document.createElement("li")
+    pai.addEventListener('click', () => {
+        event.preventDefault();
+        location.href = 'student.html?turma=' + nome
+    })
     const titulo = document.createElement("h2")
     const texto = document.createElement("p")
 
