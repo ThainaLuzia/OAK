@@ -2,23 +2,27 @@ const openModalButton = document.querySelector("#open-modal");
 const closeModalButton = document.querySelector("#close-modal");
 const modal = document.querySelector("#modal");
 const fade = document.querySelector("#fade");
-
-
-// Mudar os nomes das variaveis e dos ids (roxo, #) // 
 const listaDeAlunos = document.querySelector("#student-list");
-const studentNameInput = document.querySelector("#name_student")
-
-const cpfInput = document.querySelector("#CPF")
-const emailInput = document.querySelector("#email")
-const createPasswordInput = document.querySelector("#create_password_student")
 const emptyMessgeStudent = document.querySelector("#empty-message-student")
+const BASE_URL = "https://v2csj5c0-3000.brs.devtunnels.ms/"
+
+// CAMPOS DA MODAL DE ALUNOS
+const inputsAluno = {
+    nome: document.querySelector("#name_student"),
+    email: document.querySelector("#email"),
+    cpf: document.querySelector("#cpf"),
+    telefone: document.querySelector("#phone"),
+    endereco: document.querySelector("#address"),
+    senha: document.querySelector("#create_password_student"),
+    senhaConfirma: document.querySelector("#confirm_password_student"),
+}
 
 const alternarModal = () => {
     modal.classList.toggle("hide");
     fade.classList.toggle("hide");
 };
 
-[openModalButton, closeModalButton, fade].forEach((el) => {
+[openModalButton, closeModalButton].forEach((el) => {
     el.addEventListener("click", () => alternarModal());
 });
 
@@ -32,7 +36,7 @@ function createStudent() {
     //se deu certo: cria o component
     //alert("Não foi possivel criar a sala")
     //alert("Sala criada com sucesso")
-    createStudentComponent(studentNameInput.value, cpfInput.value, emailInput.value)
+    createStudentComponent(inputsAluno.nome.value, inputsAluno.cpf.value, inputsAluno.email.value)
     cleanStudentModalFields()
     alternarModal()
     emptyMessgeStudent.classList.add("hide")

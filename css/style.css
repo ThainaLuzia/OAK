@@ -124,8 +124,8 @@ button {
     width: 350px;
     height: 170px;
     border-radius: 10px;
-    color:#5D4895
-
+    color:#5D4895;
+    position: relative;
 }
 
 .folder-componet >h2 {
@@ -138,10 +138,26 @@ button {
     line-height: 25px;
 }
 
+.folder-componet > a {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 11px;
+}
+
+.folder-componet > a:hover {
+    border-top-right-radius: 9px;
+    background-color: rgba(0,0,0,0.3);
+}
+
 .folder-componet:hover {
     color:#EBEBEB;
     background-color: #5D4895;
     transition: 500ms;
+}
+
+.folder-componet:hover path {
+    fill:#EBEBEB;
 }
 
 .folder-componet:active {
