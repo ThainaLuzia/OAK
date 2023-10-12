@@ -88,6 +88,20 @@ button {
     color: #5D4895;
 }
 
+
+.button-secondary.red{
+    border-radius: 7px;
+    border: solid 2px #d40a5e;
+    color: #d40a5e;
+}
+
+.button-secondary.red:hover {
+    border: 2px solid transparent;
+    color: #EBEBEB;
+    transition: 500ms;
+    background-color: #d40a5e;
+}
+
 .button-primary:hover {
     background-color: transparent;
     color: #5D4895;

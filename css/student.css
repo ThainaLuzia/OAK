@@ -8,11 +8,11 @@
 .student-list-container >li {
     background-color: #DFDDE6;
     width: 100%;
-    height: 54px;
+    height: 42px;
     border-radius: 10px;
     display: flex;
-   gap: 12px;
-    padding: 12px 4px;
+    gap: 12px;
+    padding: 8px 4px;
     align-items: center;
     font-size: 14px;
     justify-content: space-between;
@@ -42,8 +42,8 @@ svg {
 
 .status {
     background-color: #39AC11;
-    width: 21px;
-    height: 21px;
+    width: 12px;
+    height: 12px;
     border-radius: 360px;
     margin-left: 24px;
 }

@@ -113,3 +113,7 @@
     border-color: #EBEBEB;
 }
 
+.textfield-container{
+    max-height: 60vh;
+    overflow: scroll;
+}

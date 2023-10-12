@@ -60,8 +60,10 @@
             <div class="modal-header">
                 <h2>Adicione um <br /> <span class="purple-text">novo aluno</span> </h2>
             </div>
-            <div class="modal body">
+            <div class="modal-body">
                 <div class="textfield-container">
+                    <label for="textfield">ID:</label>
+                        <input type="text" name="id_student" id="id_student" disabled>
                     <label for="textfield">Nome do aluno:</label>
                         <input type="text" name="name_student" id="name_student">
                     <label for="CPF">RG:</label>
@@ -71,17 +73,16 @@
                     <label for="telefone">Telefone</label>
                         <input type="phone" id="phone" class="input-padrao" required placeholder="(xx) xxxxx-xxxx">
                     <label for="telefone">Endereço:</label>
-                        <textarea name="address"  class="input-padrao" cols="40" rows="5"></textarea>
+                        <textarea name="address" id="address" class="input-padrao" cols="40" rows="5"></textarea>
                     <label for="textfield">EMAIL:</label>
                         <input type="email" name="email" id="email">
-                    <label for="textfield">Senha:</label>
-                        <input type="password" name="create_password_student" id="create_password_student">
-                    <label for="textfield">Confirmar senha:</label>
-                        <input type="password" name="confirm_password_student" id="confirm_password_student">
                 </div>
                 <div class="action-container">
-                    <button id="close-modal" class="button-secondary" onclick="limparCamposModalAluno()">Cancelar</button>
-                    <button id="criar-aluno" class="button-primary" onclick="criarAluno()">Adicionar</button>
+                    <div>
+                        <button id="close-modal" class="button-secondary" onclick="limparCamposModalAluno()">Cancelar</button>
+                        <button id="close-modal" class="button-secondary red" onclick="excluirAluno()">Excluir</button>
+                    </div>
+                    <button id="criar-aluno" class="button-primary" onclick="salvarAluno()">Salvar</button>
                 </div>
             </div>
 </body>
