@@ -66,22 +66,26 @@
                 <label for="textfield">Nome da turma:</label>
                 <input type="text" name="nome_sala" id="room_name">
                 <label for="textfield">Ano letivo:</label>
-                <input type="number" min="1900" max="2099" step="1" value="2023" id="room_year"/>
+                <input type="number" min="1900" max="2099" step="1" value="2023" id="room_year" />
                 <label>Período:</label>
                 <select name="periodo" id="room_period">
                     <option value="matutino" selected>Matutino</option>
                     <option value="vespertino">Vespertino</option>
                     <option value="noturno">Noturno</option>
-                  </select>
+                </select>
                 <label>Sala:</label>
                 <select name="periodo" id="room">
                     <option value="1" selected>Sala 1</option>
                     <option value="2">Sala 2</option>
                     <option value="3">Sala 3</option>
-                  </select>
+                </select>
             </div>
             <div class="action-container">
-                <button id="close-modal" class="button-secondary" onclick="limparCamposModalTurma()">Cancelar</button>
+                <div>
+                    <button id="close-modal" class="button-secondary"
+                        onclick="limparCamposModalTurma()">Cancelar</button>
+                    <button id="close-modal" class="button-secondary red" onclick="excluirTurma()">Excluir</button>
+                </div>
                 <button id="create-room" class="button-primary" onclick="salvarTurma()">Salvar</button>
             </div>
         </div>

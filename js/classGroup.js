@@ -33,7 +33,7 @@ onLoad();
 // AÇÕES DA TELA
 
 function salvarTurma() {
-  if (inputsTurma.id.value != null) {
+  if (inputsTurma.id.value) {
     atualizarTurma();
   } else {
     criarTurma();
@@ -72,6 +72,22 @@ function atualizarTurma() {
         "Não foi possível atualizar a turma corretamente. Tente novamente mais tarde"
       );
     });
+}
+
+function excluirTurma() {
+  if(confirm(`Deseja realmente excluir ${inputsTurma.nome.value}?`) == true){
+    excluirTurmaAPI()
+    .then(function () {
+      // SE DEU CERTO ATUALIZAR  A TURMA
+      window.location.reload();
+    })
+    .catch(function () {
+      // SE DEU ERRO ATUALIZAR A TURMA
+      alert(
+        "Não foi possível excluir a turma corretamente. Tente novamente mais tarde"
+      );
+    });
+  }
 }
 
 function limparCamposModalTurma() {
@@ -166,5 +182,15 @@ function atualizarTurmaAPI(nomeTurma, anoLetivo, periodo, sala, id) {
       sala_id: sala,
       id: id,
     }),
+  });
+}
+
+function excluirTurmaAPI(){
+  return fetch(BASE_URL + "class_group", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({id: inputsTurma.id.value}),
   });
 }
