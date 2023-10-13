@@ -10,35 +10,58 @@
 body {
     height: 100vh;
     overflow: hidden;
-    height: 100vh;
     margin: 0%;
     padding: 0%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     font-family: 'Roboto', sans-serif;
 }
 
 .imagens-container{
     display: flex;
-    align-items: center;
+    flex: 1;
     justify-content: center;
     height: 100vh;
+    padding-left: 680px;
+    width: 100%;
 }
 
 #team-img{
-    width: 931px;
+    background-color: pink;
+    width: 100%;
     height: 931px;
-}
-
-.imagens figure.team-img {
-    padding-right: 24px;
-    display: flex;
-    align-items: center;
     background-image: url('../assets/frufru.png');
+    display: flex;
 }
 
-#frufru {
-    background-color: brown;
-    width: 2433px;
-    height: 1925px;
+.descricao {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding-left: 32px;
+    padding-right: 32px;
 }
+
+.descricao >h2 {
+    background-color: aqua;
+    font-size: 52px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 130px;
+}
+
+.descricao >p {
+    background-color: plum;
+    font-size: 19px;
+    display: flex;
+    flex-direction: column;
+}
+#purple-text {
+    color: #5D4895;
+}
+
+#enter-button {
+    display: flex;
+}
+
+
