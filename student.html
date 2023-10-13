@@ -39,13 +39,16 @@
                 <a href="/classGroup.html" class="menu-link">Turmas</a>
                 <a href="/student.html" class="menu-link">Alunos</a>
             </li>
-            <button class="exit-home">Sair</button>
+            <button class="exit-home" onclick="location.href = 'index.html'">Sair</button>
         </nav>
 
         <section class="main-section">
             <div class="list-header">
                 <h1>Alunos</h1>
-                <button id="open-modal" class="button-primary">Novo aluno</button>
+                <div class="textfield-container row">
+                    <select id="class-groups-select"></select>
+                    <button id="open-modal" class="button-primary">Novo aluno</button>
+                </div>
             </div>
             <ul id="student-list" class="student-list-container">
             </ul>

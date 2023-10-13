@@ -22,7 +22,8 @@ function onLoad() {
   const urlParams = new URLSearchParams(window.location.search);
   const turmaId = urlParams.get("turma");
 
-  buscarAlunosAPI(turmaId);
+  // buscarAlunosAPI(turmaId);
+  preencherTurmasNoSelect()
 }
 
 const alternarModal = () => {
@@ -106,9 +107,10 @@ function criarComponenteAluno(id, nome, rg, cpf, telefone, endereco, email) {
   const pai = document.createElement("li");
   pai.innerHTML = `<div class="status-container">
                         <span class="status"></span>
-                        <p>${cpf}</p>
+                        <p>${id}</p>
                     </div>
                     <h3>${nome}</h3>
+                    <p>${cpf}</p>
                     <p>${email}</p>
                     <div class="list-action">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
@@ -142,6 +144,7 @@ function buscarAlunosAPI(turma_id) {
     .then((res) => res.json())
     .then((alunos) => {
       if (alunos.length <= 0) {
+        mensagemListaVazia.classList.remove("hide");
         return;
       }
 
@@ -219,4 +222,34 @@ function excluirAlunoAPI() {
     },
     body: JSON.stringify({id: inputsAluno.id.value}),
   });
+}
+
+function preencherTurmasNoSelect() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const turmaId = urlParams.get("turma");
+
+  fetch(BASE_URL + "class_groups")
+    .then((res) => res.json())
+    .then((turmas) => {
+      const componenteSelect = document.querySelector("#class-groups-select");
+      for (let index = 0; index < turmas.length; index++) {
+        const option = document.createElement('option')
+        option.value = turmas[index].id
+        option.text = turmas[index].nome_turma
+        componenteSelect.append(option)
+      }
+
+      if(turmaId){
+        componenteSelect.value = turmaId
+      }
+
+      buscarAlunosAPI(componenteSelect.value);
+      window.history.pushState('data', `Alunos ${componenteSelect.text}`, `/student.html?turma=${componenteSelect.value}`);
+
+      componenteSelect.addEventListener('change', function(){
+        window.history.pushState('data', `Alunos ${componenteSelect.text}`, `/student.html?turma=${componenteSelect.value}`);
+        listaDeAlunos.innerHTML = ""
+        buscarAlunosAPI(componenteSelect.value);
+      })
+    });
 }
