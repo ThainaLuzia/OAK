@@ -8,29 +8,29 @@ const BASE_URL = "https://v2csj5c0-3000.brs.devtunnels.ms/";
 
 // CAMPOS DA MODAL DE ALUNOS
 const inputsAluno = {
-  id: document.querySelector("#id_student"),
-  nome: document.querySelector("#name_student"),
-  rg: document.querySelector("#rg"),
-  cpf: document.querySelector("#cpf"),
-  telefone: document.querySelector("#phone"),
-  endereco: document.querySelector("#address"),
-  email: document.querySelector("#email"),
+    id: document.querySelector("#id_student"),
+    nome: document.querySelector("#name_student"),
+    rg: document.querySelector("#rg"),
+    cpf: document.querySelector("#cpf"),
+    telefone: document.querySelector("#phone"),
+    endereco: document.querySelector("#address"),
+    email: document.querySelector("#email"),
 };
 
 function onLoad() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const turmaId = urlParams.get("turma");
+    const urlParams = new URLSearchParams(window.location.search);
+    const turmaId = urlParams.get("turma");
 
-  buscarAlunosAPI(turmaId);
+    buscarAlunosAPI(turmaId);
 }
 
 const alternarModal = () => {
-  modal.classList.toggle("hide");
-  fade.classList.toggle("hide");
+    modal.classList.toggle("hide");
+    fade.classList.toggle("hide");
 };
 
 [openModalButton, closeModalButton].forEach((el) => {
-  el.addEventListener("click", () => alternarModal());
+    el.addEventListener("click", () => alternarModal());
 });
 
 onLoad();
@@ -38,75 +38,78 @@ onLoad();
 // FUNÇÕES DA TELA (CRUD)
 
 function salvarAluno() {
-  if (inputsAluno.id.value) {
-    atualizarAluno();
-  } else {
-    criarAluno();
-  }
+    if (inputsAluno.id.value) {
+        atualizarAluno();
+    } else {
+        criarAluno();
+    }
 }
 
 function criarAluno() {
-  criarAlunoAPI()
-    .then(function () {
-      // SE DEU CERTO CRIAR  O ALUNO
-      window.location.reload();
-    })
-    .catch(function () {
-      // SE DEU ERRO CRIAR A TURMA
-      alert(
-        "Não foi possível criar aluno corretamente. Tente novamente mais tarde"
-      );
-    });
+    if (camposAlunoValidos()) {
+        criarAlunoAPI()
+            .then(function () {
+                // SE DEU CERTO CRIAR  O ALUNO
+                window.location.reload();
+            })
+            .catch(function () {
+                // SE DEU ERRO CRIAR A TURMA
+                alert(
+                    "Não foi possível criar aluno corretamente. Tente novamente mais tarde"
+                );
+            });
+    }
+
 }
 
 function atualizarAluno() {
-  atualizarAlunoAPI()
-    .then(function () {
-      // SE DEU CERTO ATUALIZAR  A TURMA
-      window.location.reload();
-    })
-    .catch(function () {
-      // SE DEU ERRO ATUALIZAR A TURMA
-      alert(
-        "Não foi possível atualizar o aluno corretamente. Tente novamente mais tarde"
-      );
-    });
+    atualizarAlunoAPI()
+        .then(function () {
+            // SE DEU CERTO ATUALIZAR  A TURMA
+            window.location.reload();
+        })
+        .catch(function () {
+            // SE DEU ERRO ATUALIZAR A TURMA
+            alert(
+                "Não foi possível atualizar o aluno corretamente. Tente novamente mais tarde"
+            );
+        });
 }
 
 function excluirAluno() {
-  if(confirm(`Deseja realmente excluir ${inputsAluno.nome.value}?`) == true){
-    excluirAlunoAPI()
-    .then(function () {
-      // SE DEU CERTO ATUALIZAR  A TURMA
-      window.location.reload();
-    })
-    .catch(function () {
-      // SE DEU ERRO ATUALIZAR A TURMA
-      alert(
-        "Não foi possível excluir o aluno corretamente. Tente novamente mais tarde"
-      );
-    });
-  }
+    if (confirm(`Deseja realmente excluir ${inputsAluno.nome.value}?`) == true) {
+        excluirAlunoAPI()
+            .then(function () {
+                // SE DEU CERTO ATUALIZAR  A TURMA
+                window.location.reload();
+            })
+            .catch(function () {
+                // SE DEU ERRO ATUALIZAR A TURMA
+                alert(
+                    "Não foi possível excluir o aluno corretamente. Tente novamente mais tarde"
+                );
+            });
+    }
 }
 
 function limparCamposModalAluno() {
-  definirCamposModalAluno(null, null, null, null, null, null, null);
+    definirCamposModalAluno(null, null, null, null, null, null, null);
 }
 
 function definirCamposModalAluno(id, nome, rg, cpf, telefone, endereco, email) {
-  inputsAluno.id.value = id;
-  inputsAluno.nome.value = nome;
-  inputsAluno.rg.value = rg;
-  inputsAluno.cpf.value = cpf;
-  inputsAluno.telefone.value = telefone;
-  inputsAluno.endereco.value = endereco;
-  inputsAluno.email.value = email;
+    inputsAluno.id.value = id;
+    inputsAluno.nome.value = nome;
+    inputsAluno.rg.value = rg;
+    inputsAluno.cpf.value = cpf;
+    inputsAluno.telefone.value = telefone;
+    inputsAluno.endereco.value = endereco;
+    inputsAluno.email.value = email;
 }
 
 //criar html so que em js
 function criarComponenteAluno(id, nome, rg, cpf, telefone, endereco, email) {
-  const pai = document.createElement("li");
-  pai.innerHTML = `<div class="status-container">
+    const pai = document.createElement("li");
+    pai.innerHTML = `<div class="status-container">
                         <span class="status"></span>
                         <p>${cpf}</p>
                     </div>
@@ -119,107 +122,107 @@ function criarComponenteAluno(id, nome, rg, cpf, telefone, endereco, email) {
                         </svg>
                     </div>`;
 
-  pai.addEventListener("click", function () {
-    definirCamposModalAluno(
-      id,
-      nome,
-      rg,
-      cpf,
-      telefone,
-      endereco,
-      email,
-      null,
-      null
-    );
-    alternarModal();
-  });
+    pai.addEventListener("click", function () {
+        definirCamposModalAluno(
+            id,
+            nome,
+            rg,
+            cpf,
+            telefone,
+            endereco,
+            email,
+            null,
+            null
+        );
+        alternarModal();
+    });
 
-  listaDeAlunos.append(pai);
+    listaDeAlunos.append(pai);
 }
 
 function buscarAlunosAPI(turma_id) {
-  fetch(BASE_URL + `students?turma_id=${turma_id}`)
-    .then((res) => res.json())
-    .then((alunos) => {
-      if (alunos.length <= 0) {
-        return;
-      }
+    fetch(BASE_URL + `students?turma_id=${turma_id}`)
+        .then((res) => res.json())
+        .then((alunos) => {
+            if (alunos.length <= 0) {
+                return;
+            }
 
-      for (let valor = 0; valor < alunos.length; valor++) {
-        const aluno = alunos[valor];
-        criarComponenteAluno(
-          aluno.id,
-          aluno.nome,
-          aluno.rg,
-          aluno.cpf,
-          aluno.telefone,
-          aluno.endereco,
-          aluno.email
-        );
-      }
+            for (let valor = 0; valor < alunos.length; valor++) {
+                const aluno = alunos[valor];
+                criarComponenteAluno(
+                    aluno.id,
+                    aluno.nome,
+                    aluno.rg,
+                    aluno.cpf,
+                    aluno.telefone,
+                    aluno.endereco,
+                    aluno.email
+                );
+            }
 
-      mensagemListaVazia.classList.add("hide");
-    });
+            mensagemListaVazia.classList.add("hide");
+        });
 }
 
 function criarAlunoAPI() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const turmaId = urlParams.get("turma");
+    const urlParams = new URLSearchParams(window.location.search);
+    const turmaId = urlParams.get("turma");
 
-  return fetch(BASE_URL + "student", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      rm: null,
-      nome: inputsAluno.nome.value,
-      rg: inputsAluno.rg.value,
-      cpf: inputsAluno.cpf.value,
-      telefone: inputsAluno.telefone.value,
-      endereco: inputsAluno.endereco.value,
-      email: inputsAluno.email.value,
-      status: 1,
-      usuario_id: null,
-      turma_id: turmaId,
-    }),
-  });
+    return fetch(BASE_URL + "student", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            rm: null,
+            nome: inputsAluno.nome.value,
+            rg: inputsAluno.rg.value,
+            cpf: inputsAluno.cpf.value,
+            telefone: inputsAluno.telefone.value,
+            endereco: inputsAluno.endereco.value,
+            email: inputsAluno.email.value,
+            status: 1,
+            usuario_id: null,
+            turma_id: turmaId,
+        }),
+    });
 }
 
 function atualizarAlunoAPI() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const turmaId = urlParams.get("turma");
+    const urlParams = new URLSearchParams(window.location.search);
+    const turmaId = urlParams.get("turma");
 
-  return fetch(BASE_URL + "student", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      rm: null,
-      nome: inputsAluno.nome.value,
-      rg: inputsAluno.rg.value,
-      cpf: inputsAluno.cpf.value,
-      telefone: inputsAluno.telefone.value,
-      endereco: inputsAluno.endereco.value,
-      email: inputsAluno.email.value,
-      status: 1,
-      usuario_id: null,
-      turma_id: turmaId,
-      id: inputsAluno.id.value,
-    }),
-  });
+    return fetch(BASE_URL + "student", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            rm: null,
+            nome: inputsAluno.nome.value,
+            rg: inputsAluno.rg.value,
+            cpf: inputsAluno.cpf.value,
+            telefone: inputsAluno.telefone.value,
+            endereco: inputsAluno.endereco.value,
+            email: inputsAluno.email.value,
+            status: 1,
+            usuario_id: null,
+            turma_id: turmaId,
+            id: inputsAluno.id.value,
+        }),
+    });
 }
 
 function excluirAlunoAPI() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const turmaId = urlParams.get("turma");
+    const urlParams = new URLSearchParams(window.location.search);
+    const turmaId = urlParams.get("turma");
 
-  return fetch(BASE_URL + "student", {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({id: inputsAluno.id.value}),
-  });
+    return fetch(BASE_URL + "student", {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({id: inputsAluno.id.value }),
+    });
 }

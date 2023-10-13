@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    font-size: 100%;
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+    height: 100vh;
+    margin: 0%;
+    padding: 0%;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto', sans-serif;
+}
+
+.imagens-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#team-img{
+    width: 931px;
+    height: 931px;
+}
+
+.imagens figure.team-img {
+    padding-right: 24px;
+    display: flex;
+    align-items: center;
+    background-image: url('../assets/frufru.png');
+}
+
+#frufru {
+    background-color: brown;
+    width: 2433px;
+    height: 1925px;
+}
