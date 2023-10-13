@@ -1,5 +1,6 @@
 const openModalButton = document.querySelector("#open-modal");
 const closeModalButton = document.querySelector("#close-modal");
+const deleteModalButton = document.querySelector("#delete-student");
 const modal = document.querySelector("#modal");
 const fade = document.querySelector("#fade");
 const listaDeAlunos = document.querySelector("#student-list");
@@ -21,12 +22,18 @@ function onLoad() {
     const urlParams = new URLSearchParams(window.location.search);
     const turmaId = urlParams.get("turma");
 
-    buscarAlunosAPI(turmaId);
+  // buscarAlunosAPI(turmaId);
+  preencherTurmasNoSelect()
 }
 
 const alternarModal = () => {
-    modal.classList.toggle("hide");
-    fade.classList.toggle("hide");
+  modal.classList.toggle("hide");
+  fade.classList.toggle("hide");
+  if(inputsAluno.id.value){
+    deleteModalButton.classList.remove('hide')
+  }else{
+    deleteModalButton.classList.add('hide')
+  }
 };
 
 [openModalButton, closeModalButton].forEach((el) => {
@@ -46,50 +53,39 @@ function salvarAluno() {
 }
 
 function criarAluno() {
-    if (camposAlunoValidos()) {
-        criarAlunoAPI()
-            .then(function () {
-                // SE DEU CERTO CRIAR  O ALUNO
-                window.location.reload();
-            })
-            .catch(function () {
-                // SE DEU ERRO CRIAR A TURMA
-                alert(
-                    "Não foi possível criar aluno corretamente. Tente novamente mais tarde"
-                );
-            });
-    }
-
+  criarAlunoAPI()
+    .then(function () {
+      // SE DEU CERTO CRIAR  O ALUNO
+      window.location.reload();
+    })
+    .catch(function () {
+      // SE DEU ERRO CRIAR A TURMA
+      alert("Não foi possível criar aluno corretamente. Tente novamente mais tarde");
+    });
 }
 
 function atualizarAluno() {
-    atualizarAlunoAPI()
-        .then(function () {
-            // SE DEU CERTO ATUALIZAR  A TURMA
-            window.location.reload();
-        })
-        .catch(function () {
-            // SE DEU ERRO ATUALIZAR A TURMA
-            alert(
-                "Não foi possível atualizar o aluno corretamente. Tente novamente mais tarde"
-            );
-        });
+  atualizarAlunoAPI()
+    .then(function () {
+      // SE DEU CERTO ATUALIZAR  A TURMA
+      window.location.reload();
+    })
+    .catch(function () {
+      // SE DEU ERRO ATUALIZAR A TURMA
+      alert("Não foi possível atualizar o aluno corretamente. Tente novamente mais tarde");
+    });
 }
 
 function excluirAluno() {
-    if (confirm(`Deseja realmente excluir ${inputsAluno.nome.value}?`) == true) {
-        excluirAlunoAPI()
-            .then(function () {
-                // SE DEU CERTO ATUALIZAR  A TURMA
-                window.location.reload();
-            })
-            .catch(function () {
-                // SE DEU ERRO ATUALIZAR A TURMA
-                alert(
-                    "Não foi possível excluir o aluno corretamente. Tente novamente mais tarde"
-                );
-            });
-    }
+  if(confirm(`Deseja realmente excluir ${inputsAluno.nome.value}?`) == true){
+    excluirAlunoAPI()
+    .then(function () {
+      window.location.reload();
+    })
+    .catch(function () {
+      alert("Não foi possível excluir o aluno corretamente. Tente novamente mais tarde");
+    });
+  }
 }
 
 function limparCamposModalAluno() {
@@ -111,9 +107,10 @@ function criarComponenteAluno(id, nome, rg, cpf, telefone, endereco, email) {
     const pai = document.createElement("li");
     pai.innerHTML = `<div class="status-container">
                         <span class="status"></span>
-                        <p>${cpf}</p>
+                        <p>${id}</p>
                     </div>
                     <h3>${nome}</h3>
+                    <p>${cpf}</p>
                     <p>${email}</p>
                     <div class="list-action">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
@@ -140,13 +137,16 @@ function criarComponenteAluno(id, nome, rg, cpf, telefone, endereco, email) {
     listaDeAlunos.append(pai);
 }
 
+// COMUNICAÇÃO COM O BANCO
+
 function buscarAlunosAPI(turma_id) {
-    fetch(BASE_URL + `students?turma_id=${turma_id}`)
-        .then((res) => res.json())
-        .then((alunos) => {
-            if (alunos.length <= 0) {
-                return;
-            }
+  fetch(BASE_URL + `students?turma_id=${turma_id}`)
+    .then((res) => res.json())
+    .then((alunos) => {
+      if (alunos.length <= 0) {
+        mensagemListaVazia.classList.remove("hide");
+        return;
+      }
 
             for (let valor = 0; valor < alunos.length; valor++) {
                 const aluno = alunos[valor];
@@ -215,14 +215,41 @@ function atualizarAlunoAPI() {
 }
 
 function excluirAlunoAPI() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const turmaId = urlParams.get("turma");
+  return fetch(BASE_URL + "student", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({id: inputsAluno.id.value}),
+  });
+}
 
-    return fetch(BASE_URL + "student", {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({id: inputsAluno.id.value }),
+function preencherTurmasNoSelect() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const turmaId = urlParams.get("turma");
+
+  fetch(BASE_URL + "class_groups")
+    .then((res) => res.json())
+    .then((turmas) => {
+      const componenteSelect = document.querySelector("#class-groups-select");
+      for (let index = 0; index < turmas.length; index++) {
+        const option = document.createElement('option')
+        option.value = turmas[index].id
+        option.text = turmas[index].nome_turma
+        componenteSelect.append(option)
+      }
+
+      if(turmaId){
+        componenteSelect.value = turmaId
+      }
+
+      buscarAlunosAPI(componenteSelect.value);
+      window.history.pushState('data', `Alunos ${componenteSelect.text}`, `/student.html?turma=${componenteSelect.value}`);
+
+      componenteSelect.addEventListener('change', function(){
+        window.history.pushState('data', `Alunos ${componenteSelect.text}`, `/student.html?turma=${componenteSelect.value}`);
+        listaDeAlunos.innerHTML = ""
+        buscarAlunosAPI(componenteSelect.value);
+      })
     });
 }

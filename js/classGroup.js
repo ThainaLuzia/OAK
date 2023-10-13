@@ -1,5 +1,6 @@
 const openModalButton = document.querySelector("#open-modal");
 const closeModalButton = document.querySelector("#close-modal");
+const deleteModalButton = document.querySelector("#delete-class-group");
 const modal = document.querySelector("#modal");
 const fade = document.querySelector("#fade");
 const listaDeTurma = document.querySelector("#room-list");
@@ -22,6 +23,11 @@ function onLoad() {
 const alternarModal = () => {
   modal.classList.toggle("hide");
   fade.classList.toggle("hide");
+  if(inputsTurma.id.value){
+    deleteModalButton.classList.remove('hide')
+  }else{
+    deleteModalButton.classList.add('hide')
+  }
 };
 
 [openModalButton, closeModalButton].forEach((el) => {
