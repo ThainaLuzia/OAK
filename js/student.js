@@ -1,5 +1,6 @@
 const openModalButton = document.querySelector("#open-modal");
 const closeModalButton = document.querySelector("#close-modal");
+const deleteModalButton = document.querySelector("#delete-student");
 const modal = document.querySelector("#modal");
 const fade = document.querySelector("#fade");
 const listaDeAlunos = document.querySelector("#student-list");
@@ -27,6 +28,11 @@ function onLoad() {
 const alternarModal = () => {
   modal.classList.toggle("hide");
   fade.classList.toggle("hide");
+  if(inputsAluno.id.value){
+    deleteModalButton.classList.remove('hide')
+  }else{
+    deleteModalButton.classList.add('hide')
+  }
 };
 
 [openModalButton, closeModalButton].forEach((el) => {
@@ -53,9 +59,7 @@ function criarAluno() {
     })
     .catch(function () {
       // SE DEU ERRO CRIAR A TURMA
-      alert(
-        "Não foi possível criar aluno corretamente. Tente novamente mais tarde"
-      );
+      alert("Não foi possível criar aluno corretamente. Tente novamente mais tarde");
     });
 }
 
@@ -67,9 +71,7 @@ function atualizarAluno() {
     })
     .catch(function () {
       // SE DEU ERRO ATUALIZAR A TURMA
-      alert(
-        "Não foi possível atualizar o aluno corretamente. Tente novamente mais tarde"
-      );
+      alert("Não foi possível atualizar o aluno corretamente. Tente novamente mais tarde");
     });
 }
 
@@ -77,14 +79,10 @@ function excluirAluno() {
   if(confirm(`Deseja realmente excluir ${inputsAluno.nome.value}?`) == true){
     excluirAlunoAPI()
     .then(function () {
-      // SE DEU CERTO ATUALIZAR  A TURMA
       window.location.reload();
     })
     .catch(function () {
-      // SE DEU ERRO ATUALIZAR A TURMA
-      alert(
-        "Não foi possível excluir o aluno corretamente. Tente novamente mais tarde"
-      );
+      alert("Não foi possível excluir o aluno corretamente. Tente novamente mais tarde");
     });
   }
 }
@@ -136,6 +134,8 @@ function criarComponenteAluno(id, nome, rg, cpf, telefone, endereco, email) {
 
   listaDeAlunos.append(pai);
 }
+
+// COMUNICAÇÃO COM O BANCO
 
 function buscarAlunosAPI(turma_id) {
   fetch(BASE_URL + `students?turma_id=${turma_id}`)
@@ -212,9 +212,6 @@ function atualizarAlunoAPI() {
 }
 
 function excluirAlunoAPI() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const turmaId = urlParams.get("turma");
-
   return fetch(BASE_URL + "student", {
     method: "DELETE",
     headers: {

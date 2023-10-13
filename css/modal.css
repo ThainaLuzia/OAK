@@ -50,6 +50,10 @@
     top: 0;
 }
 
+button.hide{
+    display: none;
+}
+
 .modal-header > h2{
     text-align: center;
     width: 100%;
