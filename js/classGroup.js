@@ -48,35 +48,29 @@ function salvarTurma() {
 
 function criarTurma() {
   criarTurmaAPI()
-    .then(function () {
-      // SE DEU CERTO CRIAR  A TURMA
+  .then(function (resposta) {
+    if(resposta.status == 409) {
+      alert(`Já existe uma turma cadastrada nesse mesmo ano, sala e período`);
+    }else if(resposta.status == 200){
       window.location.reload();
-    })
-    .catch(function () {
-      // SE DEU ERRO CRIAR A TURMA
-      alert(
-        "Não foi possível criar a turma corretamente. Tente novamente mais tarde"
-      );
-    });
+    }
+  })
+  .catch(function () {
+    alert("Não foi possível criar a turma corretamente. Tente novamente mais tarde");
+  });
 }
 
 function atualizarTurma() {
-  atualizarTurmaAPI(
-    inputsTurma.nome.value,
-    inputsTurma.anoLetivo.value,
-    inputsTurma.periodo.value,
-    inputsTurma.sala.value,
-    inputsTurma.id.value
-  )
-    .then(function () {
-      // SE DEU CERTO ATUALIZAR  A TURMA
-      window.location.reload();
+  atualizarTurmaAPI(inputsTurma.nome.value,inputsTurma.anoLetivo.value,inputsTurma.periodo.value,inputsTurma.sala.value,inputsTurma.id.value)
+    .then(function (resposta) {
+      if(resposta.status == 200){
+        window.location.reload();
+      }else if(resposta.status == 409){
+        alert(`Já existe uma turma cadastrada nesse mesmo ano, sala e período`);
+      }
     })
     .catch(function () {
-      // SE DEU ERRO ATUALIZAR A TURMA
-      alert(
-        "Não foi possível atualizar a turma corretamente. Tente novamente mais tarde"
-      );
+      alert("Não foi possível atualizar a turma corretamente. Tente novamente mais tarde");
     });
 }
 

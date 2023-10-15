@@ -9,35 +9,32 @@ const BASE_URL = "https://v2csj5c0-3000.brs.devtunnels.ms/";
 
 // CAMPOS DA MODAL DE ALUNOS
 const inputsAluno = {
-    id: document.querySelector("#id_student"),
-    nome: document.querySelector("#name_student"),
-    rg: document.querySelector("#rg"),
-    cpf: document.querySelector("#cpf"),
-    telefone: document.querySelector("#phone"),
-    endereco: document.querySelector("#address"),
-    email: document.querySelector("#email"),
+  id: document.querySelector("#id_student"),
+  nome: document.querySelector("#name_student"),
+  rg: document.querySelector("#rg"),
+  cpf: document.querySelector("#cpf"),
+  telefone: document.querySelector("#phone"),
+  endereco: document.querySelector("#address"),
+  email: document.querySelector("#email"),
 };
 
 function onLoad() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const turmaId = urlParams.get("turma");
-
-  // buscarAlunosAPI(turmaId);
-  preencherTurmasNoSelect()
+  const urlParams = new URLSearchParams(window.location.search);
+  preencherTurmasNoSelect();
 }
 
 const alternarModal = () => {
   modal.classList.toggle("hide");
   fade.classList.toggle("hide");
-  if(inputsAluno.id.value){
-    deleteModalButton.classList.remove('hide')
-  }else{
-    deleteModalButton.classList.add('hide')
+  if (inputsAluno.id.value) {
+    deleteModalButton.classList.remove("hide");
+  } else {
+    deleteModalButton.classList.add("hide");
   }
 };
 
 [openModalButton, closeModalButton].forEach((el) => {
-    el.addEventListener("click", () => alternarModal());
+  el.addEventListener("click", () => alternarModal());
 });
 
 onLoad();
@@ -45,67 +42,71 @@ onLoad();
 // FUNÇÕES DA TELA (CRUD)
 
 function salvarAluno() {
-    if (inputsAluno.id.value) {
-        atualizarAluno();
-    } else {
-        criarAluno();
-    }
+  if (inputsAluno.id.value) {
+    atualizarAluno();
+  } else {
+    criarAluno();
+  }
 }
 
 function criarAluno() {
   criarAlunoAPI()
-    .then(function () {
-      // SE DEU CERTO CRIAR  O ALUNO
-      window.location.reload();
+    .then(function (resposta) {
+      if (resposta.status == 409) {
+        alert("Já existe um aluno cadastrado com esse rg, cpg ou e-mail.");
+      } else if (resposta.status == 200) {
+        window.location.reload();
+      }
     })
     .catch(function () {
-      // SE DEU ERRO CRIAR A TURMA
       alert("Não foi possível criar aluno corretamente. Tente novamente mais tarde");
     });
 }
 
 function atualizarAluno() {
   atualizarAlunoAPI()
-    .then(function () {
-      // SE DEU CERTO ATUALIZAR  A TURMA
-      window.location.reload();
+    .then(function (resposta) {
+      if (resposta.status == 409) {
+        alert("Já existe um aluno cadastrado com esse rg, cpg ou e-mail.");
+      } else if (resposta.status == 200) {
+        window.location.reload();
+      }
     })
     .catch(function () {
-      // SE DEU ERRO ATUALIZAR A TURMA
-      alert("Não foi possível atualizar o aluno corretamente. Tente novamente mais tarde");
+      alert("Não foi possível atualizar aluno corretamente. Tente novamente mais tarde");
     });
 }
 
 function excluirAluno() {
-  if(confirm(`Deseja realmente excluir ${inputsAluno.nome.value}?`) == true){
+  if (confirm(`Deseja realmente excluir ${inputsAluno.nome.value}?`) == true) {
     excluirAlunoAPI()
-    .then(function () {
-      window.location.reload();
-    })
-    .catch(function () {
-      alert("Não foi possível excluir o aluno corretamente. Tente novamente mais tarde");
-    });
+      .then(function () {
+        window.location.reload();
+      })
+      .catch(function () {
+        alert("Não foi possível excluir o aluno corretamente. Tente novamente mais tarde");
+      });
   }
 }
 
 function limparCamposModalAluno() {
-    definirCamposModalAluno(null, null, null, null, null, null, null);
+  definirCamposModalAluno(null, null, null, null, null, null, null);
 }
 
 function definirCamposModalAluno(id, nome, rg, cpf, telefone, endereco, email) {
-    inputsAluno.id.value = id;
-    inputsAluno.nome.value = nome;
-    inputsAluno.rg.value = rg;
-    inputsAluno.cpf.value = cpf;
-    inputsAluno.telefone.value = telefone;
-    inputsAluno.endereco.value = endereco;
-    inputsAluno.email.value = email;
+  inputsAluno.id.value = id;
+  inputsAluno.nome.value = nome;
+  inputsAluno.rg.value = rg;
+  inputsAluno.cpf.value = cpf;
+  inputsAluno.telefone.value = telefone;
+  inputsAluno.endereco.value = endereco;
+  inputsAluno.email.value = email;
 }
 
 //criar html so que em js
 function criarComponenteAluno(id, nome, rg, cpf, telefone, endereco, email) {
-    const pai = document.createElement("li");
-    pai.innerHTML = `<div class="status-container">
+  const pai = document.createElement("li");
+  pai.innerHTML = `<div class="status-container">
                         <span class="status"></span>
                         <p>${id}</p>
                     </div>
@@ -119,22 +120,22 @@ function criarComponenteAluno(id, nome, rg, cpf, telefone, endereco, email) {
                         </svg>
                     </div>`;
 
-    pai.addEventListener("click", function () {
-        definirCamposModalAluno(
-            id,
-            nome,
-            rg,
-            cpf,
-            telefone,
-            endereco,
-            email,
-            null,
-            null
-        );
-        alternarModal();
-    });
+  pai.addEventListener("click", function () {
+    definirCamposModalAluno(
+      id,
+      nome,
+      rg,
+      cpf,
+      telefone,
+      endereco,
+      email,
+      null,
+      null
+    );
+    alternarModal();
+  });
 
-    listaDeAlunos.append(pai);
+  listaDeAlunos.append(pai);
 }
 
 // COMUNICAÇÃO COM O BANCO
@@ -148,70 +149,70 @@ function buscarAlunosAPI(turma_id) {
         return;
       }
 
-            for (let valor = 0; valor < alunos.length; valor++) {
-                const aluno = alunos[valor];
-                criarComponenteAluno(
-                    aluno.id,
-                    aluno.nome,
-                    aluno.rg,
-                    aluno.cpf,
-                    aluno.telefone,
-                    aluno.endereco,
-                    aluno.email
-                );
-            }
+      for (let valor = 0; valor < alunos.length; valor++) {
+        const aluno = alunos[valor];
+        criarComponenteAluno(
+          aluno.id,
+          aluno.nome,
+          aluno.rg,
+          aluno.cpf,
+          aluno.telefone,
+          aluno.endereco,
+          aluno.email
+        );
+      }
 
-            mensagemListaVazia.classList.add("hide");
-        });
+      mensagemListaVazia.classList.add("hide");
+    });
 }
 
 function criarAlunoAPI() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const turmaId = urlParams.get("turma");
+  const urlParams = new URLSearchParams(window.location.search);
+  const turmaId = urlParams.get("turma");
 
-    return fetch(BASE_URL + "student", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            rm: null,
-            nome: inputsAluno.nome.value,
-            rg: inputsAluno.rg.value,
-            cpf: inputsAluno.cpf.value,
-            telefone: inputsAluno.telefone.value,
-            endereco: inputsAluno.endereco.value,
-            email: inputsAluno.email.value,
-            status: 1,
-            usuario_id: null,
-            turma_id: turmaId,
-        }),
-    });
+  return fetch(BASE_URL + "student/new", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      rm: null,
+      nome: inputsAluno.nome.value,
+      rg: inputsAluno.rg.value,
+      cpf: inputsAluno.cpf.value,
+      telefone: inputsAluno.telefone.value,
+      endereco: inputsAluno.endereco.value,
+      email: inputsAluno.email.value,
+      status: 1,
+      usuario_id: null,
+      turma_id: turmaId,
+    }),
+  });
 }
 
 function atualizarAlunoAPI() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const turmaId = urlParams.get("turma");
+  const urlParams = new URLSearchParams(window.location.search);
+  const turmaId = urlParams.get("turma");
 
-    return fetch(BASE_URL + "student", {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            rm: null,
-            nome: inputsAluno.nome.value,
-            rg: inputsAluno.rg.value,
-            cpf: inputsAluno.cpf.value,
-            telefone: inputsAluno.telefone.value,
-            endereco: inputsAluno.endereco.value,
-            email: inputsAluno.email.value,
-            status: 1,
-            usuario_id: null,
-            turma_id: turmaId,
-            id: inputsAluno.id.value,
-        }),
-    });
+  return fetch(BASE_URL + "student", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      rm: null,
+      nome: inputsAluno.nome.value,
+      rg: inputsAluno.rg.value,
+      cpf: inputsAluno.cpf.value,
+      telefone: inputsAluno.telefone.value,
+      endereco: inputsAluno.endereco.value,
+      email: inputsAluno.email.value,
+      status: 1,
+      usuario_id: null,
+      turma_id: turmaId,
+      id: inputsAluno.id.value,
+    }),
+  });
 }
 
 function excluirAlunoAPI() {
@@ -220,7 +221,7 @@ function excluirAlunoAPI() {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({id: inputsAluno.id.value}),
+    body: JSON.stringify({ id: inputsAluno.id.value }),
   });
 }
 
@@ -233,23 +234,23 @@ function preencherTurmasNoSelect() {
     .then((turmas) => {
       const componenteSelect = document.querySelector("#class-groups-select");
       for (let index = 0; index < turmas.length; index++) {
-        const option = document.createElement('option')
-        option.value = turmas[index].id
-        option.text = turmas[index].nome_turma
-        componenteSelect.append(option)
+        const option = document.createElement("option");
+        option.value = turmas[index].id;
+        option.text = turmas[index].nome_turma;
+        componenteSelect.append(option);
       }
 
-      if(turmaId){
-        componenteSelect.value = turmaId
+      if (turmaId) {
+        componenteSelect.value = turmaId;
       }
 
       buscarAlunosAPI(componenteSelect.value);
-      window.history.pushState('data', `Alunos ${componenteSelect.text}`, `/student.html?turma=${componenteSelect.value}`);
+      window.history.pushState("data",`Alunos ${componenteSelect.text}`,`/student.html?turma=${componenteSelect.value}`);
 
-      componenteSelect.addEventListener('change', function(){
-        window.history.pushState('data', `Alunos ${componenteSelect.text}`, `/student.html?turma=${componenteSelect.value}`);
-        listaDeAlunos.innerHTML = ""
+      componenteSelect.addEventListener("change", function () {
+        window.history.pushState("data",`Alunos ${componenteSelect.text}`,`/student.html?turma=${componenteSelect.value}`);
+        listaDeAlunos.innerHTML = "";
         buscarAlunosAPI(componenteSelect.value);
-      })
+      });
     });
 }
