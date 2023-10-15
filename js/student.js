@@ -42,6 +42,12 @@ onLoad();
 // FUNÇÕES DA TELA (CRUD)
 
 function salvarAluno() {
+  if(validarCPF(inputsAluno.cpf.value) == false){
+    return alert("CPF inválido")
+  }else if(validarTelefone(inputsAluno.telefone.value) == false) {
+    return alert("Telefone inválido. Deve conter o DDD")
+  }
+
   if (inputsAluno.id.value) {
     atualizarAluno();
   } else {
