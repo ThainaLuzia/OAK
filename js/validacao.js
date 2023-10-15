@@ -1,9 +1,5 @@
-function camposAlunoValidos() {
-    if (inputsAluno.nome.value.length <= 3) {
-        alert("O nome do aluno é muito curto")
-        return false
-    }
-    return true 
+function validarNome() {
+   return inputsAluno.nome.value.length >= 3
 }
 
 function validarCPF(cpf) {	
@@ -58,3 +54,18 @@ function validarTelefone(telefone) {
     return false;
   }
 
+  function validarRG(rg) {
+    return rg.length >= 9 && rg.length <= 10
+  }
+
+  function validarEmail(email) {
+    // Expressão regular para validar email com ou sem máscara
+    var regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    
+    // Remover máscara, se presente
+    var emailSemMascara = email.replace(/[^a-zA-Z0-9@.-]/g, '');
+  
+    // Verificar se o email passado é válido
+    return regex.test(emailSemMascara);
+  }
+  
