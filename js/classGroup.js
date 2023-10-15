@@ -5,7 +5,7 @@ const modal = document.querySelector("#modal");
 const fade = document.querySelector("#fade");
 const listaDeTurma = document.querySelector("#room-list");
 const mensagemListaVazia = document.querySelector("#empty-message-room");
-const BASE_URL = "https://g0sdm8q2-3000.brs.devtunnels.ms/";
+const BASE_URL = "https://rdpxv28d-3000.brs.devtunnels.ms/";
 
 // CAMPOS DA MODAL DE TURMAS
 const inputsTurma = {

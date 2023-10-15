@@ -1,4 +1,4 @@
-const BASE_URL = "https://g0sdm8q2-3000.brs.devtunnels.ms/";
+const BASE_URL = "https://rdpxv28d-3000.brs.devtunnels.ms/";
 
 // CAMPOS DA TELA DE LOGIN
 const inputsLogin = {
