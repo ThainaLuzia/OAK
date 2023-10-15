@@ -65,7 +65,7 @@ function criarAluno() {
   criarAlunoAPI()
     .then(function (resposta) {
       if (resposta.status == 409) {
-        alert("Já existe um aluno cadastrado com esse rg, cpg ou e-mail.");
+        alert("Já existe um aluno cadastrado com esse rg, cpf ou e-mail.");
       } else if (resposta.status == 200) {
         window.location.reload();
       }
@@ -79,7 +79,7 @@ function atualizarAluno() {
   atualizarAlunoAPI()
     .then(function (resposta) {
       if (resposta.status == 409) {
-        alert("Já existe um aluno cadastrado com esse rg, cpg ou e-mail.");
+        alert("Já existe um aluno cadastrado com esse rg, cpf ou e-mail.");
       } else if (resposta.status == 200) {
         window.location.reload();
       }
