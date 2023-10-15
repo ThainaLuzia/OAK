@@ -44,17 +44,16 @@ onLoad();
 function salvarAluno() {
   if(validarNome(inputsAluno.nome.value) == false){
     return alert("O nome deve conter mais de 3 dígitos")
-  }else if(validarCPF(inputsAluno.cpf.value) == false){
+  }else if(validarRG(inputsAluno.rg.value) == false) {
+    return alert("RG inválido")}
+  else if(validarCPF(inputsAluno.cpf.value) == false){
     return alert("CPF inválido")
   }else if(validarTelefone(inputsAluno.telefone.value) == false) {
     return alert("Telefone inválido. Deve conter o DDD")
-  }else if(validarRG(inputsAluno.rg.value) == false) {
-    return alert("RG inválido")
   }else if(validarEmail(inputsAluno.email.value) == false) {
     return alert("Email inválido")
   }
   
-
   if (inputsAluno.id.value) {
     atualizarAluno();
   } else {
